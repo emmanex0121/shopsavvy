@@ -1,6 +1,6 @@
 # SHOPSAVVY
 
-A Project for SAIL TECH
+An E-commerce MVP Project for SAIL TECH
 
 ## Team Members
 
