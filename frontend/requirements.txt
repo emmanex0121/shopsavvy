@@ -1,0 +1,4 @@
+react-router-dom
+antd --save
+-D tailwindcss postcss autoprefixer
+npx tailwindcss init
