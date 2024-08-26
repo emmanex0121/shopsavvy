@@ -3,3 +3,4 @@ prop-types
 antd --save
 -D tailwindcss postcss autoprefixer
 npx tailwindcss init
+primereact
