@@ -1,6 +1,7 @@
 import { Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import ButtonLogin from "./ButtonLogin";
+import PropTypes from "prop-types";
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -8,9 +9,9 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
-const LoginForm = () => (
+const LoginForm = ({ bgColor = "bg-customGrey" }) => (
   <Form
-    className="w-full max-w-lg bg-customGrey p-4 rounded-2xl"
+    className={`w-full max-w-lg ${bgColor} p-4 rounded-2xl`}
     name="basic"
     style={{
       maxWidth: 600,
@@ -38,7 +39,7 @@ const LoginForm = () => (
         Email <span className="text-customOrange">*</span>
       </label>
       <Input
-        className="mt-1 bg-customGrey border-black"
+        className={`mt-1 ${bgColor} border-black`}
         placeholder="email@example.com"
       />
     </Form.Item>
@@ -56,7 +57,7 @@ const LoginForm = () => (
         Password <span className="text-customOrange">*</span>
       </label>
       <Input.Password
-        className="mt-1 bg-customGrey border-black"
+        className={`mt-1 ${bgColor} border-black`}
         placeholder="*****************"
       />
     </Form.Item>
@@ -88,4 +89,8 @@ const LoginForm = () => (
     </div>
   </Form>
 );
+
+LoginForm.propTypes = {
+  bgColor: PropTypes.string,
+};
 export default LoginForm;

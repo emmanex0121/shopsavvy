@@ -7,6 +7,7 @@ export default {
         customPurple: "#7D54F3", // Custom purple color
         customGrey: "#CCCCCC",
         customOrange: "#EB7E80",
+        customeWhite: "#FBFBFB",
         // Add more custom colors here
       },
     },
