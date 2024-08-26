@@ -4,9 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        customPurple: "#7D54F3", // Custom blue color
-        customGreen: "#10B981", // Custom green color
-        customRed: "#EF4444", // Custom red color
+        customPurple: "#7D54F3", // Custom purple color
         customGrey: "#CCCCCC",
         customOrange: "#EB7E80",
         // Add more custom colors here

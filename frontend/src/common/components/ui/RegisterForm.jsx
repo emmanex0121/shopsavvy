@@ -1,5 +1,6 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
+import ButtonLogin from "./ButtonLogin";
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -127,9 +128,10 @@ const LoginForm = () => (
         offset: 8,
         span: 16,
       }}>
-      <Button type="primary" htmlType="submit" className="w-full">
-        Sign in
-      </Button>
+      <ButtonLogin
+        btnColor="bg-customPurple"
+        btnText="Sign Up"
+      />
     </Form.Item>
 
     <div className="text-center">
