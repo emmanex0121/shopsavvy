@@ -9,12 +9,12 @@ const LoginForm = () => (
   <Form
     className="w-full max-w-lg bg-customGrey p-4"
     name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrLoginFormerCol={{
-      span: 16,
-    }}
+    // labelCol={{
+    //   span: 8,
+    // }}
+    // wrLoginFormerCol={{
+    //   span: 16,
+    // }}
     style={{
       maxWidth: 600,
     }}
@@ -25,21 +25,25 @@ const LoginForm = () => (
     onFinishFailed={onFinishFailed}
     autoComplete="off">
     <h1 className="text-center text-2xl font-bold mb-10">Welcome Back</h1>
-    <p className="text-center" >Please enter your details to sign in</p>
+    <p className="text-center">Please enter your details to sign in</p>
+
     <Form.Item
-      label="Username"
-      name="username"
+      // label="Email"
+      name="email"
       rules={[
         {
           required: true,
-          message: "Please input your username!",
+          message: "Please input your email!",
         },
       ]}>
-      <Input />
+      <label className="block text-sm font-bold text-gray-700">
+        Email <span className="text-customOrange">*</span>
+      </label>
+      <Input className="mt-1" />
     </Form.Item>
 
     <Form.Item
-      label="Password"
+      // label="Password"
       name="password"
       rules={[
         {
@@ -47,7 +51,10 @@ const LoginForm = () => (
           message: "Please input your password!",
         },
       ]}>
-      <Input.Password />
+      <label className="block text-sm font-bold text-gray-700">
+        Password <span className="text-customOrange">*</span>
+      </label>
+      <Input.Password className="mt-1" />
     </Form.Item>
 
     <Form.Item

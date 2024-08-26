@@ -8,6 +8,7 @@ export default {
         customGreen: "#10B981", // Custom green color
         customRed: "#EF4444", // Custom red color
         customGrey: "#CCCCCC",
+        customOrange: "#EB7E80",
         // Add more custom colors here
       },
     },
