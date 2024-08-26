@@ -1,4 +1,6 @@
 import { Button, Checkbox, Form, Input } from "antd";
+import { Link } from "react-router-dom";
+
 const onFinish = (values) => {
   console.log("Success:", values);
 };
@@ -7,14 +9,8 @@ const onFinishFailed = (errorInfo) => {
 };
 const LoginForm = () => (
   <Form
-    className="w-full max-w-lg bg-customGrey p-4"
+    className="w-full max-w-lg bg-customGrey p-4 rounded-2xl"
     name="basic"
-    // labelCol={{
-    //   span: 8,
-    // }}
-    // wrLoginFormerCol={{
-    //   span: 16,
-    // }}
     style={{
       maxWidth: 600,
     }}
@@ -25,7 +21,7 @@ const LoginForm = () => (
     onFinishFailed={onFinishFailed}
     autoComplete="off">
     <h1 className="text-center text-2xl font-bold mb-10">Welcome Back</h1>
-    <p className="text-center">Please enter your details to sign in</p>
+    <p className="text-center mb-10">Please enter your details to sign in</p>
 
     <Form.Item
       // label="Email"
@@ -33,13 +29,17 @@ const LoginForm = () => (
       rules={[
         {
           required: true,
+          type: "email",
           message: "Please input your email!",
         },
       ]}>
       <label className="block text-sm font-bold text-gray-700">
         Email <span className="text-customOrange">*</span>
       </label>
-      <Input className="mt-1" />
+      <Input
+        className="mt-1 bg-customGrey border-black"
+        placeholder="name@email.com"
+      />
     </Form.Item>
 
     <Form.Item
@@ -54,18 +54,20 @@ const LoginForm = () => (
       <label className="block text-sm font-bold text-gray-700">
         Password <span className="text-customOrange">*</span>
       </label>
-      <Input.Password className="mt-1" />
+      <Input.Password
+        className="mt-1 bg-customGrey border-black"
+        placeholder="*****************"
+      />
     </Form.Item>
 
-    <Form.Item
-      name="remember"
-      valuePropName="checked"
-      wrLoginFormerCol={{
-        offset: 8,
-        span: 16,
-      }}>
-      <Checkbox>Remember me</Checkbox>
-    </Form.Item>
+    <div className="flex justify-between items-center mb-6">
+      <Form.Item name="remember" valuePropName="checked" noStyle>
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
+      <a className="text-blue-500 hover:text-blue-700" href="#">
+        Forgot Password?
+      </a>
+    </div>
 
     <Form.Item
       wrLoginFormerCol={{
@@ -76,6 +78,15 @@ const LoginForm = () => (
         Sign in
       </Button>
     </Form.Item>
+
+    <div className="text-center">
+      <p>
+        Don&apos;t have an account yet?{" "}
+        <Link className="text-blue-500 hover:text-blue-700" to="/register">
+          Sign Up
+        </Link>
+      </p>
+    </div>
   </Form>
 );
 export default LoginForm;

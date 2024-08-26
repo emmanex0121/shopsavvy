@@ -1,4 +1,5 @@
 react-router-dom
+prop-types
 antd --save
 -D tailwindcss postcss autoprefixer
 npx tailwindcss init
