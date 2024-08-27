@@ -1,12 +1,14 @@
-import React from 'react'
-import DashboardLayout from '../../common/components/layout/DashboardLayout'
+import DashboardLayout from "../../common/components/layout/DashboardLayout";
+// import PlatformPerfomance from "../../common/components/layout/PlatformPerfomance";
 
 const Dashboard = () => {
   return (
     <div>
-      <DashboardLayout />
+      <DashboardLayout>
+        {/* <PlatformPerfomance /> */}
+      </DashboardLayout>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-menu {
+  margin-top: 0 !important;
+}
+.ant-menu-item {
+  background-color: transparent !important; /* Remove background color */
+
+  color: #000000 !important;
+  /* position: relative !important; */
+}
+
+.ant-menu-item:first-child {
+  margin-bottom: 1.5rem !important;
+}
+.ant-menu-item:not(:first-child) {
+  margin-block: 1.5rem !important;
+}
+
+.ant-menu-item-active {
+  color: #7d54f3 !important;
+}
+
+.ant-menu-item:hover {
+  background-color: transparent !important; /* Remove hover background color */
+}
+
+.ant-menu-item-selected {
+  background-color: transparent !important; /* Remove selected background color */
+  color: #7d54f3 !important;
+  /* position: relative; */
+}
+.ant-menu-item .menu-item {
+  overflow: visible !important;
+}
+
+.custom-input input::placeholder {
+  color: #000000; /* Change the placeholder text color */
+  opacity: 0.7; /* Ensure opacity is 1 to make it fully visible */
+}
+
+.ant-select-selector {
+  background: #d3c4fc;
+  border-radius: 1rem;
+}
+
+/* Change background color on option hover */
+.ant-select-item-option-active {
+  background-color: #c6b2f7 !important; /* Set your desired hover background color */
+}
+
+.ant-select-selection-placeholder {
+  color: #7d54f3 !important;
+  font-weight: 700;
+  /* opacity: 2 !important; */
+}

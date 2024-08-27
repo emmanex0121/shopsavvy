@@ -1,31 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import PlatformPerformance from "./PlatformPerfomance";
+import PropTypes from "prop-types"; // Import PropTypes
+import "../../../index.css";
 import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  MenuOutlined,
+  MenuFoldOutlined,
+  AppstoreOutlined,
+  LogoutOutlined,
+  SlidersOutlined,
+  TeamOutlined,
+  ShopOutlined,
+  BellOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Grid } from "antd";
+import { Layout, Menu, Button, theme, Grid, Flex } from "antd";
+import CircleDot from "../ui/CircleDot"; // Import your CircleDot component
+import SavyyLogo from "../ui/SavyyLogo";
+import SearchBar from "../ui/Searchbar";
+import DashProfileInfo from "../ui/DashProfileInfo";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { useBreakpoint } = Grid;
 
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined].map(
-  (icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-  })
-);
+const items = [
+  { key: "1", icon: <AppstoreOutlined />, label: "Dashboard" },
+  { key: "2", icon: <ShopOutlined />, label: "Products" },
+  { key: "3", icon: <TeamOutlined />, label: "Users" },
+  { key: "4", icon: <SlidersOutlined />, label: "Settings" },
+  { key: "5", icon: <LogoutOutlined />, label: "Logout" },
+];
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedKey, setSelectedKey] = useState("1"); // Track selected menu item
   const sidebarRef = useRef(null);
   const screens = useBreakpoint();
   const isLargeScreen = screens.lg;
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
 
   useEffect(() => {
@@ -34,20 +45,40 @@ const DashboardLayout = ({ children }) => {
     }
   }, [isLargeScreen]);
 
-  const handleMenuClick = () => {
+  // Memoized function to handle clicks outside the sidebar
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !isLargeScreen &&
+        !collapsed
+      ) {
+        setCollapsed(true);
+      }
+    },
+    [collapsed, isLargeScreen]
+  );
+
+  const handleMenuClick = (e) => {
+    setSelectedKey(e.key); // Update selected key on menu click
     if (!isLargeScreen) {
       setCollapsed(true);
     }
   };
 
-  const handleClickOutside = (event) => {
-    if (
-      sidebarRef.current &&
-      !sidebarRef.current.contains(event.target) &&
-      !isLargeScreen &&
-      !collapsed
-    ) {
-      setCollapsed(true);
+  const renderContent = () => {
+    switch (selectedKey) {
+      case "1":
+        return <PlatformPerformance />;
+      case "2":
+        return <ProductsContent />;
+      case "3":
+        return <UsersContent />;
+      case "4":
+        return <SettingsContent />;
+      default:
+        return null;
     }
   };
 
@@ -61,7 +92,7 @@ const DashboardLayout = ({ children }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [collapsed, isLargeScreen]);
+  }, [collapsed, isLargeScreen, handleClickOutside]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -76,22 +107,53 @@ const DashboardLayout = ({ children }) => {
           position: "fixed",
           height: "100vh",
           zIndex: 1000,
+          background: "#FFFFFF",
           top: 0,
           left: 0,
           transition: "transform 0.2s ease",
           transform: collapsed ? "translateX(-100%)" : "translateX(0)",
         }}
         trigger={null}>
+        <div className="w-full flex items-center justify-center">
+          <SavyyLogo />
+        </div>
+        <div className="flex justify-center mb-5">
+          <DashProfileInfo />
+        </div>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={items}
+          selectedKeys={[selectedKey]} // Use selectedKey to determine current item
           onClick={handleMenuClick}
           style={{
             marginTop: "60px",
-          }}
-        />
+            background: "#FFFFFF",
+            // overflow: "visible",
+          }}>
+          {items.map((item, index) => (
+            <React.Fragment key={item.key}>
+              <Menu.Item
+                key={item.key}
+                icon={item.icon}
+                className={`menu-item ${
+                  selectedKey === item.key ? "menu-item-selected" : ""
+                }`}>
+                <div className="relative flex items-center justify-between w-full">
+                  <span>{item.label}</span>
+                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+                    {selectedKey === item.key && (
+                      <CircleDot className="circle-dot" />
+                    )}
+                  </div>
+                </div>
+              </Menu.Item>
+              {index === 2 && (
+                <div className="w-4/5 mx-auto h-[1px] bg-gray-500 my-2" />
+              )}
+            </React.Fragment>
+          ))}
+        </Menu>
       </Sider>
 
       <Layout
@@ -99,46 +161,64 @@ const DashboardLayout = ({ children }) => {
           marginLeft: isLargeScreen ? 250 : 0,
           transition: "margin-left 0.2s ease",
           position: "relative",
+          background: "#ECECEC",
         }}>
         <Header
           style={{
             padding: 0,
-            background: colorBgContainer,
+            paddingInline: "1rem",
+            background: "#ECECEC",
             position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}>
-          {!isLargeScreen && collapsed && (
-            <Button
-              className="absolute top-4 left-4"
-              icon={<MenuOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              type="text"
-              style={{ zIndex: 1100 }}
-            />
-          )}
+          <div className="flex items-center w-full">
+            {!isLargeScreen && collapsed && (
+              <Button
+                className="mr-2"
+                icon={<MenuFoldOutlined />}
+                onClick={() => setCollapsed(!collapsed)}
+                type="text"
+                style={{ zIndex: 1100 }}
+              />
+            )}
+            <div className="w-full max-w-[1000px]">
+              <SearchBar />
+            </div>
+          </div>
+          <BellOutlined className="text-2xl ml-2" />
         </Header>
 
         <Content
           style={{
-            margin: "24px 16px 0",
-            padding: 24,
+            margin: "0 16px 0",
+            padding: 0,
             minHeight: 360,
-            background: colorBgContainer,
+            // background: "#ECECEC",
             borderRadius: borderRadiusLG,
             position: "relative",
             zIndex: 1,
           }}>
-          {children}
+          {/* {children} */}
+          {renderContent()}
         </Content>
 
         <Footer
           style={{
             textAlign: "center",
+            background: "#ECECEC",
           }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
     </Layout>
   );
+};
+
+// Add PropTypes to validate the props
+DashboardLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default DashboardLayout;
