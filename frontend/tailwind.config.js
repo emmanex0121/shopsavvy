@@ -8,7 +8,9 @@ export default {
         customGrey: "#CCCCCC",
         customGreyLight: "ECECEC",
         customOrange: "#EB7E80",
-        customeWhite: "#FBFBFB",
+        customWhite: "#FBFBFB",
+        customGreen: "#02B962",
+        customBlack: "#000000",
         // Add more custom colors here
       },
     },

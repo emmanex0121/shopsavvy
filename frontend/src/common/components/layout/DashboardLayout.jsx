@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import PlatformPerformance from "./PlatformPerfomance";
+import SettingsContent from "./SettingsContent";
+import UsersContent from "./UsersContent";
+import ProductsContent from "./ProductsContent";
+
 import PropTypes from "prop-types"; // Import PropTypes
 import "../../../index.css";
 import {

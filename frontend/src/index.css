@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* In your CSS file (e.g., index.css) */
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
 
 .ant-menu {
   margin-top: 0 !important;
@@ -38,12 +41,16 @@
 
 .custom-input input::placeholder {
   color: #000000; /* Change the placeholder text color */
-  opacity: 0.7; /* Ensure opacity is 1 to make it fully visible */
+  opacity: 1; /* Ensure opacity is 1 to make it fully visible */
 }
 
 .ant-select-selector {
-  background: #d3c4fc;
-  border-radius: 1rem;
+  /* background: #d3c4fc; */
+  /* background: #7d54f3 !important; */
+  /* background: transparent; */
+  background: none !important;
+  /* opacity: 0.5; */
+  border-radius: 1rem !important;
 }
 
 /* Change background color on option hover */
@@ -54,5 +61,23 @@
 .ant-select-selection-placeholder {
   color: #7d54f3 !important;
   font-weight: 700;
-  /* opacity: 2 !important; */
+  opacity: 1 !important;
+}
+
+@media (max-width: 500px) {
+  .wrap-at-500px {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .wrap-at-400px {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 338px) {
+  .wrap-at-338px {
+    flex-wrap: wrap;
+  }
 }
