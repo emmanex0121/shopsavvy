@@ -1,9 +1,9 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 /* In your CSS file (e.g., index.css) */
-
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
 
 .ant-menu {
   margin-top: 0 !important;

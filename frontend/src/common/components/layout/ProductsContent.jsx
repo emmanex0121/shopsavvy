@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CustomButton from "../ui/CustomButton";
 import CustomTable from "../ui/CustomTable";
 import CreateProduct from "./CreateProduct";
-import { ProductContext } from "../../../contexts/Product";
+import { ProductContext } from "../../../contexts/ProductUserContext";
 
 const ProductsContent = () => {
   const { showCreateProduct, setShowCreateProduct } =

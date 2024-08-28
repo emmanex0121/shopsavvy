@@ -26,7 +26,7 @@ import CircleDot from "../ui/CircleDot"; // Import your CircleDot component
 import SavyyLogo from "../ui/SavyyLogo";
 import SearchBar from "../ui/Searchbar";
 import DashProfileInfo from "../ui/DashProfileInfo";
-import { ProductContext } from "../../../contexts/Product";
+import { ProductContext } from "../../../contexts/ProductUserContext";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -46,12 +46,12 @@ const DashboardLayout = () => {
   const screens = useBreakpoint();
   const isLargeScreen = screens.lg;
 
-  const {setShowCreateProduct} = useContext(ProductContext);
+  const { setShowCreateProduct } = useContext(ProductContext);
 
   const actions = {
     1: () => {},
     2: () => {
-      setShowCreateProduct(false)
+      setShowCreateProduct(false);
     },
     3: () => {},
     4: () => {},

@@ -3,7 +3,7 @@ import Login from "./views/Login/Login";
 import Register from "./views/Register/Register";
 import Dashboard from "./views/Dashboard/Dashboard";
 import NotFound from "./views/NotFound/NotFound";
-import ProductProvider from "./contexts/Product";
+import ProductProvider from "./contexts/ProductContext";
 
 const App = () => {
   const router = createBrowserRouter([
