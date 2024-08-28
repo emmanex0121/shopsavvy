@@ -3,7 +3,7 @@ import Login from "./views/Login/Login";
 import Register from "./views/Register/Register";
 import Dashboard from "./views/Dashboard/Dashboard";
 import NotFound from "./views/NotFound/NotFound";
-import ProductProvider from "./contexts/ProductContext";
+import ProductUserProvider from "./contexts/ProductUserContext";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -19,9 +19,9 @@ const App = () => {
       path: "/dashboard",
       Component: () => {
         return (
-          <ProductProvider>
+          <ProductUserProvider>
             <Dashboard />
-          </ProductProvider>
+          </ProductUserProvider>
         );
       },
     },
@@ -31,9 +31,7 @@ const App = () => {
     },
   ]);
 
-  return (
-      <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

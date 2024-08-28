@@ -1,12 +1,12 @@
 import { useContext } from "react";
+import { ProductUserContext } from "../../../contexts/ProductUserContext";
 import CustomButton from "../ui/CustomButton";
 import CustomTable from "../ui/CustomTable";
 import CreateProduct from "./CreateProduct";
-import { ProductContext } from "../../../contexts/ProductUserContext";
 
 const ProductsContent = () => {
   const { showCreateProduct, setShowCreateProduct } =
-    useContext(ProductContext);
+    useContext(ProductUserContext);
 
   // Handler to show CreateProduct when the button is clicked
   const handleClick = () => {
