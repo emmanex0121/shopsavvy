@@ -6,3 +6,4 @@ npx tailwindcss init
 primereact
 chart.js
 recharts
+dayjs

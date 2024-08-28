@@ -63,6 +63,38 @@
   font-weight: 700;
   opacity: 1 !important;
 }
+.custom-button {
+  background-color: #7d54f3;
+  transition: background-color 0.3s ease;
+  /* cursor: pointer; */
+}
+.custom-button:hover {
+  background-color: #d3c4fc !important;
+}
+
+/* In your index.css or any global CSS file */
+.custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #7d54f3 !important; /* Purple color */
+  border-color: #7d54f3 !important; /* Purple border */
+}
+
+.custom-checkbox .ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: #7d54f3 !important;
+}
+
+/* Add these styles to your global CSS file */
+.no-scrollbar {
+  overflow: hidden; /* Hide overflow to prevent scrollbars */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 @media (max-width: 500px) {
   .wrap-at-500px {

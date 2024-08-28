@@ -12,6 +12,7 @@
   "dependencies": {
     "antd": "^5.20.2",
     "chart.js": "^4.4.4",
+    "dayjs": "^1.11.13",
     "primereact": "^10.8.2",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

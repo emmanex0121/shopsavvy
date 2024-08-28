@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useContext,
+} from "react";
 import PlatformPerformance from "./PlatformPerfomance";
 import SettingsContent from "./SettingsContent";
 import UsersContent from "./UsersContent";
@@ -20,6 +26,7 @@ import CircleDot from "../ui/CircleDot"; // Import your CircleDot component
 import SavyyLogo from "../ui/SavyyLogo";
 import SearchBar from "../ui/Searchbar";
 import DashProfileInfo from "../ui/DashProfileInfo";
+import { ProductContext } from "../../../contexts/Product";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -38,6 +45,18 @@ const DashboardLayout = () => {
   const sidebarRef = useRef(null);
   const screens = useBreakpoint();
   const isLargeScreen = screens.lg;
+
+  const {setShowCreateProduct} = useContext(ProductContext);
+
+  const actions = {
+    1: () => {},
+    2: () => {
+      setShowCreateProduct(false)
+    },
+    3: () => {},
+    4: () => {},
+    5: () => {},
+  };
 
   const {
     token: { borderRadiusLG },
@@ -143,7 +162,9 @@ const DashboardLayout = () => {
                 className={`menu-item ${
                   selectedKey === item.key ? "menu-item-selected" : ""
                 }`}>
-                <div className="relative flex items-center justify-between w-full">
+                <div
+                  className="relative flex items-center justify-between w-full"
+                  onClick={actions[item.key]}>
                   <span>{item.label}</span>
                   <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
                     {selectedKey === item.key && (
