@@ -11,6 +11,7 @@ export default {
         customWhite: "#FBFBFB",
         customGreen: "#02B962",
         customBlack: "#000000",
+        customPurpleLight: "#D3C4FC",
         // Add more custom colors here
       },
     },

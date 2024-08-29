@@ -95,6 +95,24 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+.ant-col {
+  text-align: start !important;
+}
+/* .ant-input:hover,
+.ant-input:focus,
+.ant-input-number:hover,
+.ant-input-number:focus {
+  border-color: #7d54f3 !important;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+} */
+ 
+/* .ant-btn {
+ background: "#D3C4FC" !important;
+} */
+ .ant-btn:hover {
+  background: #D3C4FC !important;
+  opacity: 1;
+ }
 
 @media (max-width: 500px) {
   .wrap-at-500px {
