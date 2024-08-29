@@ -9,6 +9,7 @@ import PlatformPerformance from "./PlatformPerfomance";
 import SettingsContent from "./SettingsContent";
 import UsersContent from "./UsersContent";
 import ProductsContent from "./ProductsContent";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 
 import PropTypes from "prop-types"; // Import PropTypes
 import "../../../index.css";
@@ -45,6 +46,7 @@ const DashboardLayout = () => {
   const sidebarRef = useRef(null);
   const screens = useBreakpoint();
   const isLargeScreen = screens.lg;
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const { setShowCreateProduct, setShowUsers } = useContext(ProductUserContext);
 
@@ -57,7 +59,9 @@ const DashboardLayout = () => {
       setShowUsers(false);
     },
     4: () => {},
-    5: () => {},
+    5: () => {
+      navigate("/");
+    },
   };
 
   const {
