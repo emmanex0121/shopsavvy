@@ -37,7 +37,7 @@ const PasswordUpdateForm = () => {
         <Input type="password" placeholder="***********************" />
       </MyFormItem>
       <div className="flex items-center justify-center mt-5">
-        <CustomButton value="Subscribe" onClick={handleClick} />
+        <CustomButton value="Update" onClick={handleClick} />
       </div>
     </Form>
   );
