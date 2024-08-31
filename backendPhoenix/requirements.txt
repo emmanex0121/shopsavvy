@@ -1,0 +1,8 @@
+# npm i requirements
+express
+joi
+bcrypt
+bcryptjs
+dotenv
+jsonwebtoken
+mongoose
