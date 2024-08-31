@@ -5,10 +5,12 @@ const ButtonLogin = ({
   btnText = "Button",
   btnColor = "bg-blue-500",
   btnTextColor = "",
+  loading = false,
 }) => {
   return (
     <div>
       <Button
+        loading={loading}
         type="primary"
         htmlType="submit"
         className={`w-full ${btnColor} ${btnTextColor}`}>
@@ -23,6 +25,7 @@ ButtonLogin.propTypes = {
   btnText: PropTypes.string,
   btnColor: PropTypes.string,
   btnTextColor: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default ButtonLogin;

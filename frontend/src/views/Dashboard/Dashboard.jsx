@@ -4,9 +4,8 @@ import DashboardLayout from "../../common/components/layout/DashboardLayout";
 const Dashboard = () => {
   return (
     <div>
-      <DashboardLayout>
-        {/* <PlatformPerfomance /> */}
-      </DashboardLayout>
+      <DashboardLayout />
+      {/* <PlatformPerfomance /> */}
     </div>
   );
 };

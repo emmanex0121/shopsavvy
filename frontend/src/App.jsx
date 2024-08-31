@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { App as AntdApp } from "antd";
 import Login from "./views/Login/Login";
 import Register from "./views/Register/Register";
 import Dashboard from "./views/Dashboard/Dashboard";
 import NotFound from "./views/NotFound/NotFound";
 import ProductUserProvider from "./contexts/ProductUserContext";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -19,9 +21,11 @@ const App = () => {
       path: "/dashboard",
       Component: () => {
         return (
-          <ProductUserProvider>
-            <Dashboard />
-          </ProductUserProvider>
+          <ProtectedRoutes>
+            <ProductUserProvider>
+              <Dashboard />
+            </ProductUserProvider>
+          </ProtectedRoutes>
         );
       },
     },
@@ -31,7 +35,11 @@ const App = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AntdApp>
+      <RouterProvider router={router} />;
+    </AntdApp>
+  );
 };
 
 export default App;

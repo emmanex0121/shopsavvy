@@ -60,6 +60,7 @@ const DashboardLayout = () => {
     },
     4: () => {},
     5: () => {
+      sessionStorage.removeItem("***");
       navigate("/");
     },
   };

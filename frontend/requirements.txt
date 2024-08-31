@@ -8,3 +8,4 @@ primereact
 chart.js
 recharts
 dayjs
+axios
