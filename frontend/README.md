@@ -6,3 +6,4 @@ An E-commerce MVP Project for SAIL TECH
 
 - Emmanuel Nwachukwu
 - Winnifred Oguchi
+- Tested
