@@ -1,3 +1,4 @@
+// user.js
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -23,6 +24,14 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    profilePicture: {
+      type: String, // URL or file path
+      default: "", // Optional default value
+    },
+    bio: {
+      type: String,
+      default: "", // Optional default value
     },
   },
   {

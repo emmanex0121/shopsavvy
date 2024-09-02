@@ -6,3 +6,5 @@ bcryptjs
 dotenv
 jsonwebtoken
 mongoose
+cors
+--save multer

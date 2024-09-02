@@ -4,8 +4,6 @@ import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../config.js";
-// import { config } from "dotenv";
-// import { response } from "express";
 
 const registration = async (req, res) => {
   const registerSchema = Joi.object({
@@ -17,6 +15,7 @@ const registration = async (req, res) => {
   });
   try {
     // Validate User request
+    // console.log("Hiiii");
     const { error } = registerSchema.validate(req.body);
     if (error) {
       return res.status(400).json({
@@ -132,7 +131,7 @@ const login = async (req, res) => {
 
     // response if everything goes well and token generated
     res.status(200).json({
-      response: apiResponseCode.SUCESSFUL,
+      response: apiResponseCode.SUCCESSFUL,
       responseMessage: `${email} login succefully`,
       data: {
         firstName: user.firstName,
