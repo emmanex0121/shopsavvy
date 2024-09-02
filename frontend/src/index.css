@@ -65,8 +65,8 @@
   opacity: 1 !important;
 }
 .custom-button {
-  background-color: #7d54f3;
-  transition: background-color 0.3s ease;
+  background: #7d54f3;
+  transition: background 0.3s ease;
   /* cursor: pointer; */
 }
 .custom-button:hover {
@@ -111,8 +111,8 @@
   box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
 } */
 
-/* .ant-btn {
- background: "#D3C4FC" !important;
+/* .ant-btn-primary.custom-button {
+  background: transparent !important;
 } */
 .ant-btn:hover {
   background: #d3c4fc !important;

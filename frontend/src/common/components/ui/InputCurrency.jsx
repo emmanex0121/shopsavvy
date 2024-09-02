@@ -25,7 +25,7 @@ const InputCurrency = () => {
       type="text"
       value={value}
       onChange={handleChange}
-      className="bg-transparent border-customBlack border-2 rounded-xl w-full p-2" // Customize styles as needed
+      className="bg-transparent border-customBlack border-2 rounded-xl w-full min-w-[7rem] p-2" // Customize styles as needed
       placeholder="₦ 0.00"
     />
   );

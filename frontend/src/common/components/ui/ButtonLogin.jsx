@@ -3,7 +3,7 @@ import { Button } from "antd";
 
 const ButtonLogin = ({
   btnText = "Button",
-  btnColor = "bg-blue-500",
+  btnColor = "bg-customPurple",
   btnTextColor = "",
   loading = false,
 }) => {

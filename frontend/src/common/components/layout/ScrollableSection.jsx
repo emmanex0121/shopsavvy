@@ -19,16 +19,21 @@ const ScrollableSection = () => {
 
   // Sample array of image URLs
   const images = [
-    "https://via.placeholder.com/200x150/FF5733/ffffff?text=Image+1",
-    "https://via.placeholder.com/200x150/33FF57/ffffff?text=Image+2",
-    "https://via.placeholder.com/200x150/3357FF/ffffff?text=Image+3",
-    "https://via.placeholder.com/200x150/FF33A1/ffffff?text=Image+4",
-    "https://via.placeholder.com/200x150/A133FF/ffffff?text=Image+5",
-    "https://via.placeholder.com/200x150/FF8333/ffffff?text=Image+6",
-    "https://via.placeholder.com/200x150/FF3380/ffffff?text=Image+7",
-    "https://via.placeholder.com/200x150/33FFF8/ffffff?text=Image+8",
-    "https://via.placeholder.com/200x150/FF5733/ffffff?text=Image+9",
-    "https://via.placeholder.com/200x150/33FF57/ffffff?text=Image+10",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+    "https://picsum.photos/200",
+
   ];
 
   return (

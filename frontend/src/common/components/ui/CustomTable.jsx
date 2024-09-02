@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+// ./src/common/components/CustomTable.jsx
+import { useState } from "react";
 import { Table, Button, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import useFetchProducts from "../../../customeHooks/useFetchproducts";
+import useDeleteProduct from "../../../customeHooks/useDeleteProducts";
+import useNotification from "../../../customeHooks/useNotification";
+import { toTitleCase } from "../../../utils/formatters";
 import "../../../index.css";
+import PopConfirmDelete from "./PopConfirmDelete";
 
-const columns = [
+const productTableColumns = [
   {
     title: "Image",
-    dataIndex: "image",
-    render: () => (
+    dataIndex: "images",
+    render: (images) => (
       <img
-        src="https://via.placeholder.com/50"
+        src={images[0] || "https://via.placeholder.com/50"} // Show the first image or placeholder
         alt="Product"
         style={{ width: 50, height: 50 }}
       />
-    ), // Sample image rendering
+    ),
   },
   {
     title: "Name",
@@ -32,104 +38,25 @@ const columns = [
   },
   {
     title: "Product Description",
-    dataIndex: "productDescription",
+    dataIndex: "description", // Ensure this matches the API response
   },
   {
     title: "Created By",
     dataIndex: "createdBy",
+    render: (text) => toTitleCase(text),
   },
   {
     title: "Created Date",
-    dataIndex: "createdDate",
+    dataIndex: "createdAt",
     render: (date) => dayjs(date).format("MMMM D, YYYY"),
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    price: 32,
-    productDescription: "New York No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    // createdDate: "2024-08-18T10:20:30Z",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    price: 42,
-    productDescription: "London No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-18T10:20:30Z",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    price: 32,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-18T10:20:30Z",
-  },
-  {
-    key: "4",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-15T10:20:30Z",
-  },
-  {
-    key: "5",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-15T10:20:30Z",
-  },
-  {
-    key: "6",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-12T10:20:30Z",
-  },
-  {
-    key: "7",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-10T10:20:30Z",
-  },
-  {
-    key: "8",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-08-01T10:20:30Z",
-  },
-  {
-    key: "4",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-07-22T10:20:30Z",
-  },
-  {
-    key: "9",
-    name: "Disabled User",
-    price: 99,
-    productDescription: "Sydney No. 1 Lake Park",
-    createdBy: "Phoenix kheed",
-    createdDate: "2024-06-19T10:20:30Z",
-  },
-];
-
 const CustomTable = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const { products, loading, error, setProducts } = useFetchProducts();
+  const { deleteProduct, deleting, deleteError } = useDeleteProduct();
+  const { onNotify } = useNotification();
+  const [selectedProductIds, setSelectedProductIds] = useState([]);
 
   // Handlers for edit and delete actions
   const handleEdit = () => {
@@ -137,16 +64,49 @@ const CustomTable = () => {
     alert("Edit button clicked!");
   };
 
-  const handleDelete = () => {
-    console.log("Delete clicked");
-    alert("Delete button clicked!");
+  const handleDelete = async () => {
+    try {
+      await Promise.all(
+        selectedProductIds.map((key) =>
+          deleteProduct(key, () => {
+            // Optionally refresh the product list or perform other actions
+          })
+        )
+      );
+
+      // Show success notification
+      onNotify(
+        "success",
+        "Product deleted",
+        "Selected products have been deleted."
+      );
+
+      // Clear the selection after successful deletion
+      setSelectedProductIds([]);
+
+      // Update products state by filtering out deleted products
+      setProducts((prevProducts) =>
+        prevProducts.filter(
+          (product) => !selectedProductIds.includes(product._id)
+        )
+      );
+
+      //end
+    } catch (error) {
+      console.log(error);
+      onNotify(
+        "error",
+        "Deletion failed",
+        deleteError || "An error occurred while deleting products."
+      );
+    }
   };
 
   // Row selection configuration
   const rowSelection = {
-    selectedRowKeys,
-    onChange: (newSelectedRowKeys) => {
-      setSelectedRowKeys(newSelectedRowKeys); // Update selected row keys
+    selectedRowKeys: selectedProductIds,
+    onChange: (newSelectedProductIds) => {
+      setSelectedProductIds(newSelectedProductIds); // Update selected row keys
     },
     getCheckboxProps: (record) => ({
       disabled: record.name === "Disabled User", // Disable checkbox for 'Disabled User'
@@ -162,30 +122,42 @@ const CustomTable = () => {
           className="custom-button"
           icon={<EditOutlined />}
           onClick={handleEdit}
-          disabled={selectedRowKeys.length === 0} // Disable only when no rows are selected
+          disabled={
+            selectedProductIds.length === 0 || selectedProductIds.length > 1
+          } // Disable if 0 or >1 rows checked
         >
           Edit
         </Button>
-        <Button
-          type="danger"
-          className="custom-button"
-          icon={<DeleteOutlined />}
-          onClick={handleDelete}
-          disabled={selectedRowKeys.length === 0} // Disable only when no rows are selected
-        >
-          Delete
-        </Button>
+        {/* Integrating PopConfirmDelete with the Delete button */}
+        <PopConfirmDelete onConfirm={handleDelete}>
+          <Button
+            type="primary"
+            className="custom-button"
+            icon={<DeleteOutlined />}
+            disabled={selectedProductIds.length === 0 || deleting}>
+            Delete
+          </Button>
+        </PopConfirmDelete>
       </Space>
 
-      <Table
-        className="custom-checkbox"
-        rowSelection={{
-          type: "checkbox", // Force checkbox type
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={data}
-      />
+      {error ? (
+        <div className="error-message">
+          {/* Render error message */}
+          <p>Error fetching products: {error.message}</p>
+        </div>
+      ) : (
+        <Table
+          className="custom-checkbox"
+          rowSelection={{
+            type: "checkbox", // Force checkbox type
+            ...rowSelection,
+          }}
+          columns={productTableColumns}
+          dataSource={products} // Use the data from the hook
+          loading={loading}
+          rowKey="_id" // Set the row key to ensure unique rows
+        />
+      )}
     </div>
   );
 };

@@ -35,11 +35,15 @@ const useRegister = () => {
         if (endpoint === endpoints.auth.login) {
           console.log(endpoint);
           sessionStorage.setItem("***", response.data?.data?.token);
+          sessionStorage.setItem("firstName", response.data?.data?.firstName);
+          sessionStorage.setItem("lastName", response.data?.data?.lastName);
+          sessionStorage.setItem("email", response.data?.data?.email);
         }
         setTimeout(() => {
           return navigate("/dashboard");
         }, 2000);
       } else {
+        console.log(endpoint);
         onNotify("error", "Error occured", response?.data?.responseMessage);
       }
     } catch (error) {
