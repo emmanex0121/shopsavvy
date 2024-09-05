@@ -20,6 +20,7 @@ const CustomButton = ({ value, loading, onClick }) => {
     // />
 
     <Button
+      htmlType="submit"
       loading={loading}
       type="primary"
       onClick={onClick}

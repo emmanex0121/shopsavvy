@@ -31,7 +31,7 @@ const useAddProduct = () => {
       onNotify("success", "Successful", "Product added successfully");
 
       console.log("Product added successfully:", response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (err) {
       // Handle error response
       onNotify("error", "Failed", "Failed to add products");

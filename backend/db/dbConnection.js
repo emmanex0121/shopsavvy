@@ -1,20 +1,13 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-// import { object } from "joi"
+import config from "../config.js";
 
-dotenv.config({ path: "./config.env" });
 export default () => {
   mongoose
-    .connect(
-      process.env.CONNECTION_STRING.replace(
-        "<DB_PASSWORD>",
-        process.env.DB_PASSWORD
-      )
-    )
+    .connect(config.connectionstring)
     .then(() => {
-      console.log("Database connection established");
+      console.log("Database Connection Established");
     })
     .catch((error) => {
-      console.log("Database connection failed", error);
+      console.log("Database Connection Failed: ", error);
     });
 };

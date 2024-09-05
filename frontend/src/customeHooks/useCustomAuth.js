@@ -22,6 +22,7 @@ const useRegister = () => {
     } else {
       endpoint = endpoints.auth.login;
     }
+    console.log(endpoint)
 
     try {
       const response = await axiosInstance.post(endpoint, request);

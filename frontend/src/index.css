@@ -4,6 +4,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+:root {
+  --purple-color: #7d54f3;
+  --purple-color-light: #d3c4fc;
+}
+
 /* In your CSS file (e.g., index.css) */
 
 .ant-menu {
@@ -117,6 +122,21 @@
 .ant-btn:hover {
   background: #d3c4fc !important;
   opacity: 1;
+}
+
+.text-link {
+  text-decoration: none; /* Optional: Remove underline */
+  transition: color 0.3s ease; /* Optional: Smooth transition for color change */
+}
+.email-link {
+  color: var(--purple-color);
+  text-decoration: none; /* Optional: Remove underline */
+  transition: color 0.3s ease; /* Optional: Smooth transition for color change */
+}
+
+.text-link:hover,
+.email-link:hover {
+  color: var(--purple-color-light); /* Change color on hover */
 }
 
 @media (max-width: 500px) {

@@ -2,84 +2,94 @@ import { useState } from "react";
 import { Table, Button, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "../../../index.css";
+import useFetchUsers from "../../../customeHooks/useFetchUsers";
+import { toTitleCase } from "../../../utils/formatters";
+import "../../../index.css";
 // import CustomButton from "./CustomButton";
 
 const columns = [
   {
     title: "First Name",
     dataIndex: "firstName",
-    render: (text) => <a>{text}</a>,
+    render: (text) => <a className="text-link">{toTitleCase(text)}</a>,
   },
   {
     title: "Last Name",
     dataIndex: "lastName",
-    render: (text) => <a>{text}</a>,
+    render: (text) => <a className="text-link">{toTitleCase(text)}</a>,
   },
   {
     title: "Email",
     dataIndex: "email",
+    render: (text) => (
+      <a href={`mailto:${text}`} className="email-link">
+        {text}
+      </a>
+    ),
   },
   {
     title: "Username",
-    dataIndex: "username",
+    dataIndex: "userName",
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-    // createdDate: "2024-08-18T10:20:30Z",
-  },
-  {
-    key: "2",
-    firstName: "Green",
-    price: 42,
-    lastName: "Kheed",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-  {
-    key: "3",
-    firstName: "Black",
-    lastName: "Bullion",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-  {
-    key: "4",
-    firstName: "Michael",
-    lastName: "Bullion",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-  {
-    key: "5",
-    firstName: "Michael",
-    lastName: "Bullion",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-  {
-    key: "6",
-    firstName: "Michael",
-    lastName: "Bullion",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-  {
-    key: "7",
-    firstName: "Michael",
-    lastName: "Bullion",
-    email: "john.doe@email.com",
-    username: "j.micheal121",
-  },
-];
+// const data = [
+//   {
+//     key: "1",
+//     firstName: "John",
+//     lastName: "Doe",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//     // createdDate: "2024-08-18T10:20:30Z",
+//   },
+//   {
+//     key: "2",
+//     firstName: "Green",
+//     price: 42,
+//     lastName: "Kheed",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+//   {
+//     key: "3",
+//     firstName: "Black",
+//     lastName: "Bullion",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+//   {
+//     key: "4",
+//     firstName: "Michael",
+//     lastName: "Bullion",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+//   {
+//     key: "5",
+//     firstName: "Michael",
+//     lastName: "Bullion",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+//   {
+//     key: "6",
+//     firstName: "Michael",
+//     lastName: "Bullion",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+//   {
+//     key: "7",
+//     firstName: "Michael",
+//     lastName: "Bullion",
+//     email: "john.doe@email.com",
+//     username: "j.micheal121",
+//   },
+// ];
 
 const CustomUserTable = () => {
+  const { users, loading, error, setUsers } = useFetchUsers();
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   // Handlers for edit and delete actions
@@ -100,11 +110,6 @@ const CustomUserTable = () => {
       setSelectedRowKeys(newSelectedRowKeys); // Update selected row keys
     },
   };
-
-//   // What happend when the add user button is clicked
-//   const handleAddUser = () => {
-//     alert("Added user has been clicked");
-//   };
 
   return (
     <div>
@@ -141,7 +146,8 @@ const CustomUserTable = () => {
           ...rowSelection,
         }}
         columns={columns}
-        dataSource={data}
+        dataSource={users}
+        rowKey="_id"
       />
     </div>
   );

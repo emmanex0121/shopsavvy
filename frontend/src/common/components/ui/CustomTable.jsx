@@ -114,6 +114,9 @@ const CustomTable = () => {
     }),
   };
 
+  // Create a reversed copy of products without mutating the original array
+  const reversedProducts = [...products].reverse();
+
   return (
     <div>
       <Space style={{ marginBottom: 16 }}>
@@ -153,7 +156,7 @@ const CustomTable = () => {
             ...rowSelection,
           }}
           columns={productTableColumns}
-          dataSource={products} // Use the data from the hook
+          dataSource={reversedProducts} // Use the data from the hook
           loading={loading}
           rowKey="_id" // Set the row key to ensure unique rows
         />

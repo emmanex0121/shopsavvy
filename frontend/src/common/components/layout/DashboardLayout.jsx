@@ -56,7 +56,7 @@ const DashboardLayout = () => {
       setShowCreateProduct(false);
     },
     3: () => {
-      setShowUsers(false);
+      setShowUsers(true);
     },
     4: () => {},
     5: () => {

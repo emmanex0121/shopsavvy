@@ -130,7 +130,7 @@ const CreateProduct = () => {
               value="Submit"
               onClick={() => {
                 setLoading(true);
-                form.submit();
+                // form.submit();
               }}
               loading={loading}
             />
